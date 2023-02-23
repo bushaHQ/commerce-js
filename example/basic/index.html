@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busha Commerce - Demo Basic</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        @font-face {
+            font-family: "Roobert";
+            src: url("https://res.cloudinary.com/busha-inc/raw/upload/v1651833681/fonts/Roobert/Roobert-Light.otf");
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: "Roobert";
+            src: url("https://res.cloudinary.com/busha-inc/raw/upload/v1651833681/fonts/Roobert/Roobert-Regular.otf");
+            font-weight: normal;
+        }
+
+        @font-face {
+            font-family: "Roobert";
+            src: url("https://res.cloudinary.com/busha-inc/raw/upload/v1651833681/fonts/Roobert/Roobert-Medium.otf");
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: "Roobert";
+            src: url("https://res.cloudinary.com/busha-inc/raw/upload/v1651833681/fonts/Roobert/Roobert-SemiBold.otf");
+            font-weight: 600;
+        }
+
+        @font-face {
+            font-family: "Roobert";
+            src: url("https://res.cloudinary.com/busha-inc/raw/upload/v1651833681/fonts/Roobert/Roobert-Bold.otf");
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: "Roobert";
+            src: url("https://res.cloudinary.com/busha-inc/raw/upload/v1651833681/fonts/Roobert/Roobert-Heavy.otf");
+            font-weight: 900;
+        }
+
+        * {
+            margin: 0;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 10px;
+        }
+
+        html,
+        body,
+        button {
+            margin: 0;
+            font-family: "Roobert", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+                "Helvetica Neue", sans-serif;
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-size: 1rem;
+
+            color: #000639;
+        }
+
+        button,
+        a {
+            cursor: pointer;
+        }
+
+        code {
+            font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+                monospace;
+        }
+    </style>
+
+    <style>
+        h1 {
+            font-size: 2rem !important;
+            margin-bottom: 20px !important;
+        }
+
+        form {
+            width: 50%;
+            gap: 24px;
+        }
+
+        label {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            height: 40px;
+            border-radius: 4px;
+            font-size: 1.4rem !important;
+            padding: 0px 10px !important;
+        }
+
+        button[type="submit"] {
+            border-radius: 20px;
+            font-size: 1.4rem;
+            height: 40px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="w-full min-h-screen">
+        <h1 class="text-center font-medium">Demo Payment Page</h1>
+
+        <form class="w-[50%] mx-auto flex flex-col gap-[24px]" id="form">
+
+            <div class="flex flex-col">
+                <label for="local_amount">Amount</label>
+                <input type="text" name="local_amount" id="local_amount" placeholder="0" value="20000"
+                    class="block border">
+            </div>
+
+
+            <div class="flex flex-col">
+                <label>Currency</label>
+                <input type="text" name="local_currency" id="local_currency" placeholder="NGN" value="NGN"
+                    class="block border">
+
+            </div>
+
+            <div class="flex flex-col">
+                <label>Business ID</label>
+                <input type="text" name="business_id" id="business_id" placeholder="1234"
+                    value="ae1fe014-a086-4279-87f3-74345767843a" class="block border">
+            </div>
+
+            <div class="flex flex-col">
+                <label>Customer email</label>
+                <input type="text" name="meta[email]" id="email" placeholder="bolaji@busha.co" value="bolaji@busha.co"
+                    class="block border">
+            </div>
+
+            <div class="flex flex-col">
+                <label>Customer name</label>
+                <input type="text" name="meta[name]" id="name" placeholder="Abolaji Bisiriyu" value="Abolaji Bisiriyu"
+                    class="block border">
+            </div>
+
+
+            <div class="flex flex-col">
+                <label>Reference</label>
+                <input type="text" name="reference" id="reference" placeholder="charge reference" value=""
+                    class="block border">
+            </div>
+
+            <div class="flex flex-col">
+                <label>Mode</label>
+                <select type="text" name="mode" id="mode" value="test" class="block border">
+                    <option value="test">Test</option>
+                    <option value="live">Live</option>
+                </select>
+            </div>
+
+            <div class="flex flex-col">
+                <label>Callback URL</label>
+                <input type="text" name="callback_url" id="callback_url"
+                    value="https://busha-pug-pay-staging.herokuapp.com/demo-response" class="block border">
+            </div>
+
+            <button type="submit" class="bg-green-900 text-white">Pay</button>
+
+        </form>
+    </main>
+
+    <script src="../../dist/index.js"></script>
+
+
+
+    <script>
+        (function () {
+
+            const form = document.getElementById("form");
+
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const BushaCommerce = window.BushaCommerce;
+
+                if (BushaCommerce) {
+                    console.log("up and runinng!");
+
+                    const callback_url = document.getElementById("callback_url").value
+
+                    const payload = {
+                        reference: document.getElementById("reference").value || `Demo_ref_${new Date().getTime()}`,
+                        business_id: document.getElementById("business_id").value,
+                        local_amount: Number(document.getElementById("local_amount").value),
+                        local_currency: document.getElementById("local_currency").value,
+                        meta: {
+                            name: document.getElementById("name").value,
+                            email: document.getElementById("email").value
+                        },
+                        mode: document.getElementById("mode").value,
+                        onClose: () => {
+                            console.log("Payment cancelled!");
+                        },
+                        onSuccess: (d) => {
+                            console.log(d);
+                        }
+                    }
+
+                    if (callback_url) {
+                        payload.callback_url = callback_url;
+                    }
+
+                    BushaCommerce(payload)
+
+                    // console.log(res);
+                }
+            })
+
+
+        }())
+    </script>
+
+
+</body>
+
+</html>

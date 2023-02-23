@@ -1,0 +1,21 @@
+name: Busha Cloud Functions Develop
+on:
+  push:
+    branches:
+      - main
+env:
+  PAYMENT_UI: ${{ vars.PAYMENT_UI }}
+jobs:
+  generate output for production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - run: npm i
+      - run: npm run build
+      - run: mv -rf dist output
+      - run: git add .
+      - run: git commit -m "generated production output"
+      - run: git push
