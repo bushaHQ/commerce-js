@@ -18,4 +18,6 @@ jobs:
       - run: cp -rf dist output
       - run: git add .
       - run: git commit -m "generated production output"
+      - run: git config --local user.email "abolajibisiriyu@gmail.com"
+      - run: git config --local user.name "Abolaji Bisiriyu"
       - run: git push
