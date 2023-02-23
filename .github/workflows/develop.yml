@@ -6,7 +6,7 @@ on:
 env:
   PAYMENT_UI: ${{ vars.PAYMENT_UI }}
 jobs:
-  generate output for production:
+  generate-output-for-production:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
