@@ -15,7 +15,7 @@ jobs:
           node-version: "16"
       - run: yarn
       - run: yarn build
-      - run: mv -rf dist output
+      - run: cp -rf dist output
       - run: git add .
       - run: git commit -m "generated production output"
       - run: git push
