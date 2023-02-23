@@ -13,8 +13,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
-      - run: npm i
-      - run: npm run build
+      - run: yarn
+      - run: yarn build
       - run: mv -rf dist output
       - run: git add .
       - run: git commit -m "generated production output"
