@@ -92,7 +92,7 @@ const onMessage = (e: MessageEvent<MessageType>) => {
     cleanup();
 
     if (payload.onClose) {
-      payload.onClose();
+      payload.onClose(e.data);
     }
   }
 
