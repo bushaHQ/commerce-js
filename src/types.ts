@@ -14,6 +14,6 @@ export interface BushaCommercePayload {
   reference: string;
   callback_url: string;
   mode?: "test" | "live";
-  onClose?: VoidFunction;
+  onClose?: (d?: any) => void;
   onSuccess?: (d?: any) => void;
 }
