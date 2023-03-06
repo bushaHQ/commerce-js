@@ -112,6 +112,7 @@ export function createSpinnerEl() {
 
 export function createIframeEl() {
   const iframeEl = document.createElement("iframe");
+  iframeEl.allow = "clipboard-read; clipboard-write";
   iframeEl.style.width = "100%";
   // iframeEl.style.maxWidth = "100%";
   iframeEl.style.height = "100%";
