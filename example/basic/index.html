@@ -182,7 +182,7 @@
         </form>
     </main>
 
-    <script src="../../dist/index.js"></script>
+    <script src="../../dist/index.min.js"></script>
 
 
 
@@ -213,6 +213,7 @@
                         mode: document.getElementById("mode").value,
                         onClose: () => {
                             console.log("Payment cancelled!");
+                            document.getElementById("reference").value = `Demo_ref_${new Date().getTime()}`
                         },
                         onSuccess: (d) => {
                             console.log(d);

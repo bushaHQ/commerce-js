@@ -10,18 +10,28 @@ dotenv.config();
 
 const config: RollupOptions = {
   input: "src/index.ts",
-  output: {
-    dir: "dist",
-    format: "iife",
-  },
+  output: [
+    {
+      dir: "dist",
+    },
+    {
+      file: "dist/index.min.js",
+      name: "BushaCommerce",
+      format: "iife",
+    },
+  ],
 
   plugins: [
-    typescript(),
+    typescript({
+      declaration: true,
+      outDir: "dist",
+      rootDir: "src",
+    }),
     terser(),
     nodeResolve(),
     commonjs(),
     replace({
-      "process.env.PAYMENT_UI": JSON.stringify(process.env.PAYMENT_UI),
+      "process.env.PAYMENT_UI": process.env.PAYMENT_UI,
       preventAssignment: true,
     }),
   ],

@@ -56,7 +56,7 @@ export function validatePayload(p: BushaCommercePayload) {
     }),
   });
 
-  return chargePayloadSchema.validate(p);
+  return chargePayloadSchema.validateSync(p);
 }
 
 export function createContainerEl() {
