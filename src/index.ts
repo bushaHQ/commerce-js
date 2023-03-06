@@ -20,10 +20,10 @@ import { BushaCommercePayload, MessageType } from "./types";
 
 let payload: BushaCommercePayload;
 
-async function BushaCommerce(p: BushaCommercePayload) {
+export default function BushaCommerce(p: BushaCommercePayload) {
   injectGlobalStyles();
   // console.log(p);
-  await validatePayload(p);
+  validatePayload(p);
 
   payload = p;
 
@@ -51,8 +51,6 @@ async function BushaCommerce(p: BushaCommercePayload) {
 
   window.addEventListener("message", onMessage);
 }
-
-(window as any).BushaCommerce = BushaCommerce;
 
 function cleanup() {
   const containerEl = document.getElementById(CONTAINER_ID);

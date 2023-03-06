@@ -1,24 +1,23 @@
-name: Busha Cloud Functions Develop
+name: Busha Commerce JS
 on:
   push:
     branches:
       - main
 env:
   PAYMENT_UI: ${{ vars.PAYMENT_UI }}
+  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 jobs:
-  generate-output-for-production:
+  publish-latest-to-npm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "16.x"
+          registry-url: "https://registry.npmjs.org"
+          scope: "@busha"
       - run: yarn
       - run: yarn build
-      - run: rm -rf output
-      - run: cp -rf dist output
       - run: git config user.email "abolajibisiriyu@gmail.com"
       - run: git config user.name "Abolaji Bisiriyu"
-      - run: git add .
-      - run: git commit -m "generated production output"
-      - run: git push
+      - run: yarn publish --access public
