@@ -116,7 +116,7 @@ export function createIframeEl() {
   iframeEl.style.width = "100%";
   // iframeEl.style.maxWidth = "100%";
   iframeEl.style.height = "100%";
-  iframeEl.style.border = "red";
+  // iframeEl.style.border = "red";
   iframeEl.style.position = "absolute";
   iframeEl.style.left = "50%";
   iframeEl.style.top = "0px";
