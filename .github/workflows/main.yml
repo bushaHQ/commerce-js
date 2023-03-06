@@ -18,8 +18,6 @@ jobs:
           scope: "@busha"
       - run: yarn
       - run: yarn build
-      - run: rm -rf output
-      - run: cp -rf dist output
       - run: git config user.email "abolajibisiriyu@gmail.com"
       - run: git config user.name "Abolaji Bisiriyu"
       - run: yarn publish --access public
