@@ -1,4 +1,4 @@
-name: Busha Cloud Functions Develop
+name: Busha Commerce JS
 on:
   push:
     branches:
