@@ -26,7 +26,9 @@ const config: RollupOptions = {
       "process.env.PAYMENT_UI": process.env.PAYMENT_UI,
       preventAssignment: true,
     }),
-    typescript(),
+    typescript({
+      rootDir: "src",
+    }),
     terser(),
     nodeResolve(),
     commonjs(),
