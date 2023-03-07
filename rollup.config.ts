@@ -28,7 +28,7 @@ const config: RollupOptions = {
     }),
     typescript({
       declaration: true,
-      declarationDir: "dist",
+      outDir: "dist",
       rootDir: "src",
     }),
     terser(),
