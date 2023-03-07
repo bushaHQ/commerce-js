@@ -12,7 +12,7 @@
   "scripts": {
     "build": "rollup -c rollup.config.ts --configPlugin typescript",
     "start": "rollup -w -c rollup.config.ts --configPlugin typescript",
-    "dist:cleanup": "rm -rf dist/constants dist/helper.d.ts"
+    "dist:cleanup": "rm -rf dist/constants dist/helper.d.ts output"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
