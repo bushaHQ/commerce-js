@@ -49,8 +49,8 @@ export function validatePayload(p: BushaCommercePayload) {
     callback_url: string(), //.required(),
     mode: string().matches(/(test|live)/),
     meta: object({
-      email: string().ensure().email(),
-      name: string().ensure().min(2),
+      email: string().email(),
+      name: string().min(2),
     }).default(undefined),
   });
 

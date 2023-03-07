@@ -1,25 +1,24 @@
-name: Busha Commerce JS Beta
+name: Busha Commerce JS develop
 on:
   push:
     branches:
       - develop
 env:
   PAYMENT_UI: ${{ vars.PAYMENT_UI_STAGING }}
-  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 jobs:
-  publish-beta-to-npm:
+  generate-output-for-staging:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
-          registry-url: "https://registry.npmjs.org"
-          scope: "@busha"
-      - run: npm i
-      - run: npm run build
-      - run: npm run dist:cleanup
+      - run: yarn
+      - run: yarn build
+      - run: rm -rf output
+      - run: cp -rf dist output
       - run: git config user.email "abolajibisiriyu@gmail.com"
       - run: git config user.name "Abolaji Bisiriyu"
-      - run: npm version patch -m "bumped to %s" -f
-      - run: npm publish --access public --tag beta
+      - run: git add .
+      - run: git commit -m "generated develop output"
+      - run: git push
