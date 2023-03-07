@@ -17,7 +17,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           scope: "@busha"
       - run: npm i
-      - run: npm build
+      - run: npm run build
       - run: git config user.email "abolajibisiriyu@gmail.com"
       - run: git config user.name "Abolaji Bisiriyu"
       - run: npm publish --access public
