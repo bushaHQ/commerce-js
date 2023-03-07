@@ -23,10 +23,12 @@ const config: RollupOptions = {
 
   plugins: [
     replace({
-      "process.env.PAYMENT_UI": process.env.PAYMENT_UI,
+      "process.env.PAYMENT_UI": JSON.stringify(process.env.PAYMENT_UI),
       preventAssignment: true,
     }),
     typescript({
+      declaration: true,
+      declarationDir: "dist",
       rootDir: "src",
     }),
     terser(),
