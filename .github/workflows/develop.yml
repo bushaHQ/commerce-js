@@ -21,5 +21,4 @@ jobs:
       - run: npm run dist:cleanup
       - run: git config user.email "abolajibisiriyu@gmail.com"
       - run: git config user.name "Abolaji Bisiriyu"
-      - run: npm version patch
       - run: npm publish --access public --tag beta
