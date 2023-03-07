@@ -140,8 +140,7 @@
 
             <div class="flex flex-col">
                 <label>Business ID</label>
-                <input type="text" name="business_id" id="business_id" placeholder="1234"
-                    value="ae1fe014-a086-4279-87f3-74345767843a" class="block border">
+                <input type="text" name="business_id" id="business_id" placeholder="1234" value="" class="block border">
             </div>
 
             <div class="flex flex-col">
@@ -171,18 +170,12 @@
                 </select>
             </div>
 
-            <div class="flex flex-col">
-                <label>Callback URL</label>
-                <input type="text" name="callback_url" id="callback_url"
-                    value="https://busha-pug-pay-staging.herokuapp.com/demo-response" class="block border">
-            </div>
-
             <button type="submit" class="bg-green-900 text-white">Pay</button>
 
         </form>
     </main>
 
-    <script src="../../dist/index.js"></script>
+    <script src="../../dist/index.min.js"></script>
 
 
 
@@ -199,28 +192,34 @@
                 if (BushaCommerce) {
                     console.log("up and runinng!");
 
-                    const callback_url = document.getElementById("callback_url").value
+                    const name = document.getElementById("name").value
+                    const email = document.getElementById("email").value
 
                     const payload = {
                         reference: document.getElementById("reference").value || `Demo_ref_${new Date().getTime()}`,
                         business_id: document.getElementById("business_id").value,
                         local_amount: Number(document.getElementById("local_amount").value),
                         local_currency: document.getElementById("local_currency").value,
-                        meta: {
-                            name: document.getElementById("name").value,
-                            email: document.getElementById("email").value
-                        },
                         mode: document.getElementById("mode").value,
                         onClose: () => {
                             console.log("Payment cancelled!");
+                            document.getElementById("reference").value = `Demo_ref_${new Date().getTime()}`
                         },
                         onSuccess: (d) => {
                             console.log(d);
                         }
                     }
 
-                    if (callback_url) {
-                        payload.callback_url = callback_url;
+                    if (name || email) {
+                        payload.meta = {}
+
+                        if (name) {
+                            payload.meta.name = name;
+                        }
+
+                        if (email) {
+                            payload.meta.email = email;
+                        }
                     }
 
                     BushaCommerce(payload)

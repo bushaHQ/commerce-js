@@ -47,16 +47,14 @@ export function validatePayload(p: BushaCommercePayload) {
     business_id: string().required(),
     reference: string().required(),
     callback_url: string(), //.required(),
-    mode: string()
-      .optional()
-      .matches(/(test|live)/),
+    mode: string().matches(/(test|live)/),
     meta: object({
-      email: string().optional().ensure().email(),
-      name: string().optional().ensure(),
-    }),
+      email: string().ensure().email(),
+      name: string().ensure().min(2),
+    }).default(undefined),
   });
 
-  return chargePayloadSchema.validate(p);
+  return chargePayloadSchema.validateSync(p);
 }
 
 export function createContainerEl() {
@@ -112,10 +110,11 @@ export function createSpinnerEl() {
 
 export function createIframeEl() {
   const iframeEl = document.createElement("iframe");
+  iframeEl.allow = "clipboard-read; clipboard-write";
   iframeEl.style.width = "100%";
   // iframeEl.style.maxWidth = "100%";
   iframeEl.style.height = "100%";
-  iframeEl.style.border = "red";
+  // iframeEl.style.border = "red";
   iframeEl.style.position = "absolute";
   iframeEl.style.left = "50%";
   iframeEl.style.top = "0px";
