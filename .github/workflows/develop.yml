@@ -20,4 +20,4 @@ jobs:
       - run: yarn build
       - run: git config user.email "abolajibisiriyu@gmail.com"
       - run: git config user.name "Abolaji Bisiriyu"
-      - run: yarn publish --access public --tag beta
+      # - run: yarn publish --access public --tag beta

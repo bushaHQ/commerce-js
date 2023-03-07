@@ -14,11 +14,11 @@ const config: RollupOptions = {
     {
       dir: "dist",
     },
-    {
-      file: "dist/index.min.js",
-      name: "BushaCommerce",
-      format: "iife",
-    },
+    // {
+    //   file: "dist/index.min.js",
+    //   name: "BushaCommerce",
+    //   format: "iife",
+    // },
   ],
 
   plugins: [
