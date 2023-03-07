@@ -22,13 +22,7 @@ const config: RollupOptions = {
   ],
 
   plugins: [
-    typescript({
-      compilerOptions: {
-        outDir: "./dist",
-        rootDir: "./src",
-        declaration: true,
-      },
-    }),
+    typescript(),
     terser(),
     nodeResolve(),
     commonjs(),
