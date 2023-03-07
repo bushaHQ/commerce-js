@@ -11,7 +11,7 @@
   },
   "scripts": {
     "generate-declaration": "tsc --project tsconfig.declaration.json",
-    "build": "rollup -c rollup.config.ts --configPlugin typescript && yarn generate-declaration",
+    "build": "rollup -c rollup.config.ts --configPlugin typescript",
     "start": "rollup -w -c rollup.config.ts --configPlugin typescript"
   },
   "dependencies": {
