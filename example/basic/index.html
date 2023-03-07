@@ -140,8 +140,7 @@
 
             <div class="flex flex-col">
                 <label>Business ID</label>
-                <input type="text" name="business_id" id="business_id" placeholder="1234"
-                    value="" class="block border">
+                <input type="text" name="business_id" id="business_id" placeholder="1234" value="" class="block border">
             </div>
 
             <div class="flex flex-col">
@@ -211,11 +210,16 @@
                         }
                     }
 
-                    if (name) {
-                        payload.meta.name = name;
-                    }
-                    if (email) {
-                        payload.meta.email = email;
+                    if (name || email) {
+                        payload.meta = {}
+
+                        if (name) {
+                            payload.meta.name = name;
+                        }
+
+                        if (email) {
+                            payload.meta.email = email;
+                        }
                     }
 
                     BushaCommerce(payload)
