@@ -15,11 +15,11 @@ jobs:
           node-version: "16"
       - run: npm i
       - run: npm run build
+      - run: git config user.email "abolajibisiriyu@gmail.com"
+      - run: git config user.name "Abolaji Bisiriyu"
       - run: npm version patch -m "bumped to %s" -f
       - run: rm -rf output
       - run: cp -rf dist output
-      - run: git config user.email "abolajibisiriyu@gmail.com"
-      - run: git config user.name "Abolaji Bisiriyu"
       - run: git add .
       - run: git commit -m "generated develop output"
       - run: git push
