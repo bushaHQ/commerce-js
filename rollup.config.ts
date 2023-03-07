@@ -1,5 +1,3 @@
-import { fileURLToPath } from "url";
-import path from "path";
 import type { RollupOptions } from "rollup";
 import typescript from "@rollup/plugin-typescript";
 import terser from "@rollup/plugin-terser";
@@ -10,18 +8,14 @@ import replace from "@rollup/plugin-replace";
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-
-const __dirname = path.dirname(__filename);
-
 const config: RollupOptions = {
-  input: path.join(__dirname, "src/index.ts"),
+  input: "src/index.ts",
   output: [
     {
-      dir: path.join(__dirname, "dist"),
+      dir: "dist",
     },
     {
-      file: path.join(__dirname, "dist/index.min.js"),
+      file: "dist/index.min.js",
       name: "BushaCommerce",
       format: "iife",
     },
@@ -30,8 +24,8 @@ const config: RollupOptions = {
   plugins: [
     typescript({
       declaration: true,
-      outDir: path.join(__dirname, "dist"),
-      rootDir: path.join(__dirname, "src"),
+      outDir: "./dist",
+      rootDir: "./src",
     }),
     terser(),
     nodeResolve(),
