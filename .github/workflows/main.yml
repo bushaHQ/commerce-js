@@ -16,8 +16,8 @@ jobs:
           node-version: "16"
           registry-url: "https://registry.npmjs.org"
           scope: "@busha"
-      - run: yarn
-      - run: yarn build
+      - run: npm i
+      - run: npm build
       - run: git config user.email "abolajibisiriyu@gmail.com"
       - run: git config user.name "Abolaji Bisiriyu"
-      - run: yarn publish --access public
+      - run: npm publish --access public
