@@ -45,7 +45,7 @@ export function validatePayload(p: BushaCommercePayload) {
     local_amount: number().required(),
     local_currency: string().required(),
     business_id: string().required(),
-    reference: string().required(),
+    reference: string(),
     callback_url: string(), //.required(),
     mode: string().matches(/(test|live)/),
     meta: object({
