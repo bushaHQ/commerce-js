@@ -6,8 +6,10 @@
     "@rollup/plugin-terser": "^0.4.0",
     "@rollup/plugin-typescript": "^11.0.0",
     "@types/node": "^18.14.0",
+    "dotenv": "^16.0.3",
     "rollup": "^3.17.2",
-    "tslib": "^2.5.0"
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.5"
   },
   "scripts": {
     "build": "rollup -c rollup.config.ts --configPlugin typescript",
@@ -15,8 +17,6 @@
     "dist:cleanup": "rm -rf dist/constants dist/helper.d.ts output"
   },
   "dependencies": {
-    "dotenv": "^16.0.3",
-    "typescript": "^4.9.5",
     "yup": "^1.0.0"
   },
   "name": "@busha/commerce-js",
