@@ -31,7 +31,17 @@ export default function BushaCommerce(p: BushaCommercePayload) {
 
   const spinner = createSpinnerEl();
   const closeBtn = createCloseBtnEl();
-  closeBtn.addEventListener("click", cleanup);
+
+  closeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    cleanup();
+    if (payload.onClose) {
+      payload.onClose({
+        status: CANCELLED_STATUS,
+        data: { reference: payload.reference },
+      });
+    }
+  });
 
   container.appendChild(spinner);
   container.appendChild(closeBtn);
