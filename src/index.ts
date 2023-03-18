@@ -59,7 +59,9 @@ export default function BushaCommerce(p: BushaCommercePayload) {
 
   // iframe.contentDocument?.body.appendChild(iframeForm);
 
-  iframeForm.submit();
+  if (process.env.NODE_ENV !== "test") {
+    iframeForm.submit();
+  }
 
   window.addEventListener("message", onMessage);
 }
