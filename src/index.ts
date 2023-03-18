@@ -55,7 +55,9 @@ export default function BushaCommerce(p: BushaCommercePayload) {
 
   const iframeForm = createFormEl(rest);
 
-  iframe.contentDocument?.body.appendChild(iframeForm);
+  container.appendChild(iframeForm);
+
+  // iframe.contentDocument?.body.appendChild(iframeForm);
 
   iframeForm.submit();
 

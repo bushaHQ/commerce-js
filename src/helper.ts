@@ -8,6 +8,7 @@ import {
   CLOSE_BUTTON_ID,
   PAY_UI,
   IFRAME_ID,
+  FORM_ID,
 } from "./constants/variables";
 import { BushaCommercePayload } from "./types";
 import { close } from "./constants/icons";
@@ -119,6 +120,7 @@ export function createIframeEl() {
   const iframeEl = document.createElement("iframe");
 
   iframeEl.dataset.testid = IFRAME_ID;
+  iframeEl.name = IFRAME_ID;
   iframeEl.allow = "clipboard-write";
   iframeEl.style.width = "100%";
   // iframeEl.style.maxWidth = "100%";
@@ -137,6 +139,8 @@ type FormPayload = Omit<BushaCommercePayload, "onClose" | "onSuccess">;
 
 export function createFormEl(payload: FormPayload) {
   const formEl = document.createElement("form");
+  formEl.target = IFRAME_ID;
+  formEl.dataset.testid = FORM_ID;
   formEl.action = PAY_UI ?? "";
   formEl.method = "POST";
   formEl.style.display = "none";
