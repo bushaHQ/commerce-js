@@ -1,12 +1,12 @@
-import { getByText, screen, waitFor } from "@testing-library/dom";
+import { getByText, screen, waitFor, within } from "@testing-library/dom";
 import "@testing-library/jest-dom";
 
 import BushaCommerce from "../src";
 import {
   CLOSE_BUTTON_ID,
   CONTAINER_ID,
+  FORM_ID,
   IFRAME_ID,
-  LOADER_ID,
 } from "../src/constants/variables";
 
 const onClose = jest.fn();
@@ -37,7 +37,7 @@ afterEach(() => {
   const containerEl = document.getElementById(CONTAINER_ID);
 
   if (containerEl) document.body.removeChild(containerEl);
-  
+
   jest.clearAllMocks();
 });
 
@@ -47,20 +47,11 @@ test("Shows loader, iframe and close button when called", async () => {
   getByText(container, "Pay").click();
 
   await waitFor(async () => {
-    expect(screen.queryByTestId(LOADER_ID)).toBeInTheDocument();
+    expect(screen.queryByTestId(CONTAINER_ID)).toBeInTheDocument();
     expect(screen.queryByTestId(CLOSE_BUTTON_ID)).toBeInTheDocument();
     expect(screen.queryByTestId(IFRAME_ID)).toBeInTheDocument();
-
-    const iframeForm = (
-      screen.getByTestId(IFRAME_ID) as HTMLIFrameElement
-    ).contentDocument?.body.querySelector("form");
-
-    iframeForm?.addEventListener(
-      "submit",
-      jest.fn(() => {})
-    );
-
-    expect(iframeForm).toBeTruthy();
+    expect(screen.queryByTestId(FORM_ID)).toBeInTheDocument();
+    // expect(screen.queryByRole("form")).toBeInTheDocument(); // weird, doesn't work
   });
 });
 
@@ -70,13 +61,7 @@ test("cleanups after close button is clicked", async () => {
   getByText(container, "Pay").click();
 
   await waitFor(async () => {
-    expect(screen.queryByTestId(IFRAME_ID)).toBeInTheDocument();
-
-    const iframeForm = (
-      screen.getByTestId(IFRAME_ID) as HTMLIFrameElement
-    ).contentDocument?.body.querySelector("form");
-
-    expect(iframeForm).toBeTruthy();
+    expect(screen.queryByTestId(CONTAINER_ID)).toBeInTheDocument();
   });
 
   const closeButton = screen.getByTestId(CLOSE_BUTTON_ID);

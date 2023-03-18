@@ -1,15 +1,14 @@
-import { CONTAINER_ID, IFRAME_ID } from "../../src/constants/variables";
+import { CONTAINER_ID } from "../../src/constants/variables";
 
-describe("Pay with commerce-js basic", async () => {
+describe("Pay with commerce-js basic", () => {
   it("Visit example page", () => {
     cy.visitBasicExamplePage();
 
     cy.window().should("have.property", "BushaCommerce");
 
-    const busiessameField = cy.get("#business_id");
-
-    busiessameField.type(Cypress.env("BUSINESS_ID"));
-    busiessameField.should("have.value", Cypress.env("BUSINESS_ID"));
+    cy.get("#business_id")
+      .type(Cypress.env("BUSINESS_ID"))
+      .should("have.value", Cypress.env("BUSINESS_ID"));
 
     cy.findByRole("button", { name: /pay/i }).should("exist");
   });
@@ -19,38 +18,65 @@ describe("Pay with commerce-js basic", async () => {
 
     cy.window().should("have.property", "BushaCommerce");
 
-    const amountField = cy.get("#local_amount");
-    const busiessameField = cy.get("#business_id");
+    cy.get("#local_amount").clear().type("500");
+    cy.get("#business_id").type(Cypress.env("BUSINESS_ID"));
 
-    amountField.clear().type("500");
-    busiessameField.type(Cypress.env("BUSINESS_ID"));
+    cy.findByRole("button", { name: /pay/i }).click();
+
+    cy.findByTestId(CONTAINER_ID)
+      .should("exist")
+      .find("form")
+      .should("not.be.undefined")
+      .should("not.be.visible");
+
+    cy.iframe()
+      .find("#root")
+      .should("not.be.undefined")
+      .contains(/Select the payment method you want to use/i);
+  });
+
+  it("Popup is notified when pay app initializes", () => {
+    cy.visitBasicExamplePage({
+      onBeforeLoad(win) {
+        cy.spy(win, "postMessage").as("postMessage");
+      },
+    });
+
+    cy.get("#local_amount").clear().type("500");
+    cy.get("#business_id").type(Cypress.env("BUSINESS_ID"));
 
     cy.findByRole("button", { name: /pay/i }).click();
 
     cy.findByTestId(CONTAINER_ID).should("exist");
 
-    cy.getPayAppIframeBody()
-      .find(`form[action="POST"]`)
-      .should("not.be.undefined");
+    cy.get("@postMessage").should("have.been.called");
 
-    cy.findByTestId(IFRAME_ID).should("be.visible")
-      // .its("0.contentWindow.location")
-      // .then((loc) => {
-      //   console.log(loc.pathname);
-      //   expect(loc.href).to.include("/pay")
-      // })
-      // .location("pathname")
-      // .should("include", "/pay");
-    // .its("0.contentWindow.location.href").should("include", "/pay");
+    cy.iframe().find("#root").should("not.be.undefined");
+  });
 
-    // cy.getPayAppIframeBody()
-    //   .wait(1000)
-    //   .find("#root")
-    //   .should("not.be.undefined");
+  it("Closes popup when close button on pay widget is clicked", () => {
+    cy.visitBasicExamplePage();
 
-    // cy.getPayAppIframeBody()
-    //   .wait(1000)
-    //   .find("#root")
-    //   .should("include.text", /Select the payment method you want to use/i);
+    cy.get("#local_amount").clear().type("500");
+    cy.get("#business_id").type(Cypress.env("BUSINESS_ID"));
+
+    cy.findByRole("button", { name: /pay/i }).click();
+
+    cy.iframe().find("#root .header button").should("exist").click();
+
+    cy.iframe()
+      .find("#root .content")
+      .contains(
+        "Your transaction is not completed yet. Are you sure you want to cancel?"
+      )
+      .should("be.visible");
+
+    cy.iframe()
+      .find("#root .content")
+      .find("div button:last-of-type")
+      .should("exist")
+      .click();
+
+    cy.findByTestId(CONTAINER_ID).should("not.exist");
   });
 });

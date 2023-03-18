@@ -27,18 +27,13 @@
 //
 declare namespace Cypress {
   interface Chainable {
-     /**
+    /**
      * Goto example pay page example/basic/index.html
      * @example
      * cy.visitBasicExamplePage()
      */
-    visitBasicExamplePage(): Chainable<void>;
-
-     /**
-     * Gets the pay app iframe
-     * @example
-     * cy.getPayAppIframeBody()
-     */
-    getPayAppIframeBody(): Chainable<JQuery<any>>;
+    visitBasicExamplePage(
+      options?: Partial<Cypress.VisitOptions>
+    ): Chainable<void>;
   }
 }
