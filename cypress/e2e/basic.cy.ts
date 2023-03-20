@@ -4,7 +4,7 @@ describe("Pay with commerce-js basic", () => {
   it("Visit example page", () => {
     cy.visitBasicExamplePage();
 
-    cy.window().should("have.property", "BushaCommerce");
+    cy.window().its("BushaCommerce");
 
     cy.get("#business_id")
       .type(Cypress.env("BUSINESS_ID"))
@@ -16,7 +16,7 @@ describe("Pay with commerce-js basic", () => {
   it("Opens popup on submit pay form", () => {
     cy.visitBasicExamplePage();
 
-    cy.window().should("have.property", "BushaCommerce");
+    cy.window().its("BushaCommerce");
 
     cy.get("#local_amount").clear().type("500");
     cy.get("#business_id").type(Cypress.env("BUSINESS_ID"));
