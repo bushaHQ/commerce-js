@@ -31,7 +31,17 @@ export default function BushaCommerce(p: BushaCommercePayload) {
 
   const spinner = createSpinnerEl();
   const closeBtn = createCloseBtnEl();
-  closeBtn.addEventListener("click", cleanup);
+
+  closeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    cleanup();
+    if (payload.onClose) {
+      payload.onClose({
+        status: CANCELLED_STATUS,
+        data: { reference: payload.reference },
+      });
+    }
+  });
 
   container.appendChild(spinner);
   container.appendChild(closeBtn);
@@ -45,9 +55,13 @@ export default function BushaCommerce(p: BushaCommercePayload) {
 
   const iframeForm = createFormEl(rest);
 
-  iframe.contentDocument?.body.appendChild(iframeForm);
+  container.appendChild(iframeForm);
 
-  iframeForm.submit();
+  // iframe.contentDocument?.body.appendChild(iframeForm);
+
+  if (process.env.NODE_ENV !== "test") {
+    iframeForm.submit();
+  }
 
   window.addEventListener("message", onMessage);
 }

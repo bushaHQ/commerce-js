@@ -7,6 +7,8 @@ import {
   LOADER_ID,
   CLOSE_BUTTON_ID,
   PAY_UI,
+  IFRAME_ID,
+  FORM_ID,
 } from "./constants/variables";
 import { BushaCommercePayload } from "./types";
 import { close } from "./constants/icons";
@@ -18,6 +20,7 @@ export function injectGlobalStyles() {
 
   const styleEl = document.createElement("style");
   styleEl.id = STYLESHEET_ID;
+  styleEl.dataset.testid = STYLESHEET_ID;
 
   document.head.appendChild(styleEl);
 
@@ -60,6 +63,7 @@ export function validatePayload(p: BushaCommercePayload) {
 export function createContainerEl() {
   const containerEl = document.createElement("div");
   containerEl.id = CONTAINER_ID;
+  containerEl.dataset.testid = CONTAINER_ID;
   containerEl.style.position = "fixed";
   containerEl.style.top = "0px";
   containerEl.style.left = "0px";
@@ -74,6 +78,7 @@ export function createContainerEl() {
 export function createCloseBtnEl() {
   const closeBtnEl = document.createElement("button");
   closeBtnEl.id = CLOSE_BUTTON_ID;
+  closeBtnEl.dataset.testid = CLOSE_BUTTON_ID;
   closeBtnEl.setAttribute("type", "button");
   closeBtnEl.style.width = "40px";
   closeBtnEl.style.height = "40px";
@@ -90,6 +95,7 @@ export function createCloseBtnEl() {
 export function createSpinnerEl() {
   const spinnerEl = document.createElement("div");
   spinnerEl.id = LOADER_ID;
+  spinnerEl.dataset.testid = LOADER_ID;
   spinnerEl.style.width = "40px";
   spinnerEl.style.height = "40px";
   spinnerEl.style.backgroundColor = "transparent";
@@ -97,20 +103,25 @@ export function createSpinnerEl() {
   spinnerEl.style.borderLeftColor = "transparent";
   spinnerEl.style.borderBottomColor = "transparent";
   spinnerEl.style.borderRadius = "100%";
-  spinnerEl.animate(
-    [{ transform: "rotate(0)" }, { transform: "rotate(360deg)" }],
-    {
-      duration: 300,
-      iterations: Infinity,
-    }
-  );
+
+  if (spinnerEl.animate)
+    spinnerEl.animate(
+      [{ transform: "rotate(0)" }, { transform: "rotate(360deg)" }],
+      {
+        duration: 300,
+        iterations: Infinity,
+      }
+    );
 
   return spinnerEl;
 }
 
 export function createIframeEl() {
   const iframeEl = document.createElement("iframe");
-  iframeEl.allow = "clipboard-read; clipboard-write";
+
+  iframeEl.dataset.testid = IFRAME_ID;
+  iframeEl.name = IFRAME_ID;
+  iframeEl.allow = "clipboard-write";
   iframeEl.style.width = "100%";
   // iframeEl.style.maxWidth = "100%";
   iframeEl.style.height = "100%";
@@ -128,6 +139,8 @@ type FormPayload = Omit<BushaCommercePayload, "onClose" | "onSuccess">;
 
 export function createFormEl(payload: FormPayload) {
   const formEl = document.createElement("form");
+  formEl.target = IFRAME_ID;
+  formEl.dataset.testid = FORM_ID;
   formEl.action = PAY_UI ?? "";
   formEl.method = "POST";
   formEl.style.display = "none";

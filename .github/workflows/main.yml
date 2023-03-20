@@ -6,8 +6,33 @@ on:
 env:
   PAYMENT_UI: ${{ vars.PAYMENT_UI }}
   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  CYPRESS_BUSINESS_ID: ${{ vars.CYPRESS_BUSINESS_ID }}
+
 jobs:
+  run-unit-test-for-production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - run: npm i
+      - run: npm run test:ci
+
+  run-e2e-test-for-production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - uses: cypress-io/github-action@v5.1.0
+      - run: npm i
+      - run: npm run build
+      - run: npm run test:e2e:ci
+
   publish-latest-to-npm:
+    needs: [run-unit-test-for-production, run-e2e-test-for-production]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -19,6 +44,10 @@ jobs:
       - run: npm i
       - run: npm run build
       - run: npm run dist:cleanup
+      - run: CURRENT_VERSION="$(npx -c 'echo "$npm_package_version"')"
       - run: git config user.email "abolajibisiriyu@gmail.com"
       - run: git config user.name "Abolaji Bisiriyu"
+      - run: gh release create $CURRENT_VERSION
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm publish --access public
