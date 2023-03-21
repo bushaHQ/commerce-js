@@ -121,7 +121,7 @@ export function createIframeEl() {
 
   iframeEl.dataset.testid = IFRAME_ID;
   iframeEl.name = IFRAME_ID;
-  iframeEl.allow = "clipboard-write";
+  iframeEl.allow = `clipboard-write self ${PAY_UI}`;
   iframeEl.style.width = "100%";
   // iframeEl.style.maxWidth = "100%";
   iframeEl.style.height = "100%";
