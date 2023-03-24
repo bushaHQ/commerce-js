@@ -11,7 +11,7 @@ export interface BushaCommercePayload {
     };
     business_id: string;
     reference?: string;
-    callback_url: string;
+    callback_url?: string;
     mode?: "test" | "live";
     onClose?: (d?: any) => void;
     onSuccess: (d?: any) => void;
