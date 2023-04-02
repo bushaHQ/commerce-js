@@ -7,7 +7,7 @@ export default defineConfig({
   chromeWebSecurity: false,
   env: {
     BASIC_EXAMPLE_PAGE: "./example/basic/index.html",
-    PUBLIC_KEY: process.env.CYPRESS_PUBLIC_KEY,
+    BUSINESS_ID: process.env.CYPRESS_BUSINESS_ID
   },
   e2e: {
     setupNodeEvents(on, config) {

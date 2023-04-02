@@ -6,7 +6,7 @@ on:
 env:
   PAYMENT_UI: ${{ vars.PAYMENT_UI }}
   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-  CYPRESS_PUBLIC_KEY: ${{ vars.CYPRESS_PUBLIC_KEY }}
+  CYPRESS_BUSINESS_ID: ${{ vars.CYPRESS_BUSINESS_ID }}
 
 jobs:
   run-unit-test-for-production:

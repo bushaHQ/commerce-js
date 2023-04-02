@@ -35,10 +35,11 @@ import BushaCommerce from "@busha/commerce-js";
 
 ```
   const payload = {
-        reference: `ref_${new Date().getTime()}`, // optional, will be auto-generated if nothing's passed
-        public_key: "[YOUR PUBLISHABLE KEY]",
+        reference: `Demo_ref_${new Date().getTime()}`,
+        business_id: "[YOUR BUSINESS ID]",
         local_amount: 2000,
         local_currency: "NGN", // "USD"
+        mode: "test",  // "test" | "live", // defaults to live
         meta: {email: "email@example.com", name: "Busha" } // optional customer info
         onClose: (d) => {
             console.log("Payment cancelled!", d);
@@ -50,7 +51,3 @@ import BushaCommerce from "@busha/commerce-js";
 
     BushaCommerce(payload)
 ```
-
-> Can't find your publishable key ?
->
-> ![Publishable key](https://res.cloudinary.com/busha-inc/image/upload/v1680477724/Screenshot_2023-04-03_at_00.13.21.png)
