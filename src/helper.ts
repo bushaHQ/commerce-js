@@ -47,10 +47,10 @@ export function validatePayload(p: BushaCommercePayload) {
   const chargePayloadSchema = object({
     local_amount: number().required(),
     local_currency: string().required(),
-    business_id: string().required(),
+    public_key: string().required(),
     reference: string(),
-    callback_url: string(), //.required(),
-    mode: string().matches(/(test|live)/),
+    // callback_url: string(), //.required(),
+    // mode: string().matches(/(test|live)/),
     meta: object({
       email: string().email(),
       name: string().min(2),
