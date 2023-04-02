@@ -9,10 +9,8 @@ export interface BushaCommercePayload {
         email?: string;
         name?: string;
     };
-    business_id: string;
+    public_key: string;
     reference?: string;
-    callback_url?: string;
-    mode?: "test" | "live";
     onClose?: (d?: any) => void;
     onSuccess: (d?: any) => void;
 }
