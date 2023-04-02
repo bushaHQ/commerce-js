@@ -139,8 +139,8 @@
             </div>
 
             <div class="flex flex-col">
-                <label>Business ID</label>
-                <input type="text" name="business_id" id="business_id" placeholder="1234" value="" class="block border">
+                <label>Public Key</label>
+                <input type="text" name="public_key" id="public_key" placeholder="1234" value="" class="block border">
             </div>
 
             <div class="flex flex-col">
@@ -160,14 +160,6 @@
                 <label>Reference</label>
                 <input type="text" name="reference" id="reference" placeholder="charge reference" value=""
                     class="block border">
-            </div>
-
-            <div class="flex flex-col">
-                <label>Mode</label>
-                <select type="text" name="mode" id="mode" value="test" class="block border">
-                    <option value="test">Test</option>
-                    <option value="live">Live</option>
-                </select>
             </div>
 
             <button type="submit" class="bg-green-900 text-white">Pay</button>
@@ -197,10 +189,9 @@
 
                     const payload = {
                         reference: document.getElementById("reference").value || `Demo_ref_${new Date().getTime()}`,
-                        business_id: document.getElementById("business_id").value,
+                        public_key: document.getElementById("public_key").value,
                         local_amount: Number(document.getElementById("local_amount").value),
                         local_currency: document.getElementById("local_currency").value,
-                        mode: document.getElementById("mode").value,
                         onClose: () => {
                             console.log("Payment cancelled!");
                             document.getElementById("reference").value = `Demo_ref_${new Date().getTime()}`
