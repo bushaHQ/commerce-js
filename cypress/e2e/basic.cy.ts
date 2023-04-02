@@ -6,9 +6,9 @@ describe("Pay with commerce-js basic", () => {
 
     cy.window().its("BushaCommerce");
 
-    cy.get("#business_id")
-      .type(Cypress.env("BUSINESS_ID"))
-      .should("have.value", Cypress.env("BUSINESS_ID"));
+    cy.get("#public_key")
+      .type(Cypress.env("PUBLIC_KEY"))
+      .should("have.value", Cypress.env("PUBLIC_KEY"));
 
     cy.findByRole("button", { name: /pay/i }).should("exist");
   });
@@ -19,7 +19,7 @@ describe("Pay with commerce-js basic", () => {
     cy.window().its("BushaCommerce");
 
     cy.get("#local_amount").clear().type("500");
-    cy.get("#business_id").type(Cypress.env("BUSINESS_ID"));
+    cy.get("#public_key").type(Cypress.env("PUBLIC_KEY"));
 
     cy.findByRole("button", { name: /pay/i }).click();
 
@@ -43,7 +43,7 @@ describe("Pay with commerce-js basic", () => {
     });
 
     cy.get("#local_amount").clear().type("500");
-    cy.get("#business_id").type(Cypress.env("BUSINESS_ID"));
+    cy.get("#public_key").type(Cypress.env("PUBLIC_KEY"));
 
     cy.findByRole("button", { name: /pay/i }).click();
 
@@ -58,7 +58,7 @@ describe("Pay with commerce-js basic", () => {
     cy.visitBasicExamplePage();
 
     cy.get("#local_amount").clear().type("500");
-    cy.get("#business_id").type(Cypress.env("BUSINESS_ID"));
+    cy.get("#public_key").type(Cypress.env("PUBLIC_KEY"));
 
     cy.findByRole("button", { name: /pay/i }).click();
 
