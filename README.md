@@ -53,4 +53,4 @@ import BushaCommerce from "@busha/commerce-js";
 
 > Can't find your publishable key ?
 >
-> [Publishable key](./Screenshot.png)
+> ![Publishable key](https://res.cloudinary.com/busha-inc/image/upload/v1680477724/Screenshot_2023-04-03_at_00.13.21.png)
