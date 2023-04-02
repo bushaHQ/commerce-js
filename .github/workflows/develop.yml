@@ -25,11 +25,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
-      - uses: cypress-io/github-action@v5
+      - uses: cypress-io/github-action@v5.1.0
         with:
           browser: chrome
           build: npm run build
-          command: npm run test:e2e:ci
 
   generate-output-for-staging:
     needs: [run-unit-test-for-staging, run-e2e-test-for-staging]
