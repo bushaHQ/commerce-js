@@ -1,11 +1,11 @@
 import { BushaCommercePayload } from "./types";
 export declare function injectGlobalStyles(): void;
 export declare function validatePayload(p: BushaCommercePayload): {
-    reference?: string | undefined;
-    meta: {
+    meta?: {
         email?: string | undefined;
         name?: string | undefined;
-    };
+    } | undefined;
+    reference?: string | undefined;
     local_amount: number;
     local_currency: string;
     public_key: string;

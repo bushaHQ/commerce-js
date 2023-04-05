@@ -26,6 +26,11 @@ function setup() {
       local_amount: 2000,
       local_currency: "NGN",
       onSuccess: jest.fn(),
+      meta: {
+        name: "",
+        order_id: "123",
+        someotherInnfo: "",
+      },
       onClose,
     });
   });

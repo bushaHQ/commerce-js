@@ -6,8 +6,7 @@ export interface BushaCommercePayload {
     local_amount: number;
     local_currency: string;
     meta?: {
-        email?: string;
-        name?: string;
+        [key: string]: string;
     };
     public_key: string;
     reference?: string;
