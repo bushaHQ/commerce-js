@@ -48,13 +48,13 @@ export function validatePayload(p: BushaCommercePayload) {
     local_amount: number().required(),
     local_currency: string().required(),
     public_key: string().required(),
-    reference: string(),
+    reference: string().optional(),
     // callback_url: string(), //.required(),
     // mode: string().matches(/(test|live)/),
     meta: object({
       email: string().email(),
-      name: string().min(2),
-    }).default(undefined),
+      name: string(),
+    }).optional(),
   });
 
   return chargePayloadSchema.validateSync(p);
