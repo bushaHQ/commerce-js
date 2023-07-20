@@ -188,13 +188,13 @@
                     const email = document.getElementById("email").value
 
                     const payload = {
-                        reference: document.getElementById("reference").value || `Demo_ref_${new Date().getTime()}`,
+                        reference: document.getElementById("reference").value || `ref_${new Date().getTime()}`,
                         public_key: document.getElementById("public_key").value,
                         local_amount: Number(document.getElementById("local_amount").value),
                         local_currency: document.getElementById("local_currency").value,
                         onClose: () => {
                             console.log("Payment cancelled!");
-                            document.getElementById("reference").value = `Demo_ref_${new Date().getTime()}`
+                            document.getElementById("reference").value = `ref_${new Date().getTime()}`
                         },
                         onSuccess: (d) => {
                             console.log(d);
@@ -214,8 +214,6 @@
                     }
 
                     BushaCommerce(payload)
-
-                    // console.log(res);
                 }
             })
 
