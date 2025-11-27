@@ -5,7 +5,7 @@ on:
       - develop
 env:
   PAYMENT_UI: ${{ vars.PAYMENT_UI_STAGING }}
-  # CYPRESS_PUBLIC_KEY: ${{ vars.CYPRESS_PUBLIC_KEY_STAGING }}
+  CYPRESS_PUBLIC_KEY: ${{ vars.CYPRESS_PUBLIC_KEY_STAGING }}
 
 jobs:
   run-unit-test-for-staging:
