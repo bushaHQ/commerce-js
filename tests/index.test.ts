@@ -23,8 +23,10 @@ function setup() {
   button?.addEventListener("click", () => {
     BushaCommerce({
       public_key: "live_1234",
-      local_amount: 2000,
-      local_currency: "NGN",
+      quote_amount: "1000",
+      quote_currency: "NGN",
+      source_currency: "NGN",
+      target_currency: "USD",
       onSuccess: jest.fn(),
       meta: {
         name: "",
