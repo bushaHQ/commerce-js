@@ -39,7 +39,7 @@
   },
   "name": "@busha/commerce-js",
   "description": "Busha commerce js library",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "directories": {
