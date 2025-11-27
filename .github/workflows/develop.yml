@@ -5,7 +5,7 @@ on:
       - develop
 env:
   PAYMENT_UI: ${{ vars.PAYMENT_UI_STAGING }}
-  CYPRESS_PUBLIC_KEY: ${{ vars.CYPRESS_PUBLIC_KEY_STAGING }}
+  # CYPRESS_PUBLIC_KEY: ${{ vars.CYPRESS_PUBLIC_KEY_STAGING }}
 
 jobs:
   run-unit-test-for-staging:
@@ -46,5 +46,5 @@ jobs:
       - run: rm -rf output
       - run: cp -rf dist output
       - run: git add .
-      - run: git commit -m "generated develop output"
+      - run: git diff --staged --quiet || git commit -m "generated develop output"
       - run: git push
