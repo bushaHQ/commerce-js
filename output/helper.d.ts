@@ -6,8 +6,11 @@ export declare function validatePayload(p: BushaCommercePayload): {
         name?: string | undefined;
     } | undefined;
     reference?: string | undefined;
-    local_amount: number;
-    local_currency: string;
+    callback_url?: string | undefined;
+    quote_amount: string;
+    quote_currency: string;
+    target_currency: string;
+    source_currency: string;
     public_key: string;
 };
 export declare function createContainerEl(): HTMLDivElement;
