@@ -45,11 +45,13 @@ export function injectGlobalStyles() {
 
 export function validatePayload(p: BushaCommercePayload) {
   const chargePayloadSchema = object({
-    local_amount: number().required(),
-    local_currency: string().required(),
+    quote_amount: string().required(),
+    quote_currency: string().required(),
+    target_currency: string().required(),
+    source_currency: string().required(),
     public_key: string().required(),
     reference: string().optional(),
-    // callback_url: string(), //.required(),
+    callback_url: string().optional(),
     // mode: string().matches(/(test|live)/),
     meta: object({
       email: string().email(),
@@ -141,7 +143,7 @@ export function createFormEl(payload: FormPayload) {
   const formEl = document.createElement("form");
   formEl.target = IFRAME_ID;
   formEl.dataset.testid = FORM_ID;
-  formEl.action = PAY_UI ?? "";
+  formEl.action = PAY_UI ? `${PAY_UI}/pay` : "";
   formEl.method = "POST";
   formEl.style.display = "none";
 
