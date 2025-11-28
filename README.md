@@ -1,24 +1,22 @@
 # Busha commerce-js
 
-Receive crypto payments with busha commerce js
+Receive crypto payments with Busha commerce
 
-&nbsp;
+## Installation
 
-# Installation
+### Browser
 
-Browser
-
-```
-<script src="https://cdn.jsdelivr.net/npm/@busha/commerce-js@1.0.12/dist/index.min.js"></script>
+```html
+<script src="https://cdn.jsdelivr.net/npm/@busha/commerce-js@1.0.16/dist/index.min.js"></script>
 
 <script>
-    const BushaCommerce = window.BushaCommerce
+  const BushaCommerce = window.BushaCommerce;
 </script>
 ```
 
-Node
+### Node
 
-```
+```bash
 yarn add @busha/commerce-js
 
 # OR
@@ -26,31 +24,33 @@ yarn add @busha/commerce-js
 npm i @busha/commerce-js
 ```
 
-```
+```javascript
 import BushaCommerce from "@busha/commerce-js";
 ```
-&nbsp;
 
-# Usage
+## Usage
 
+```javascript
+const payload = {
+  reference: `ref_${new Date().getTime()}`, // optional, will be auto-generated if nothing's passed
+  public_key: "[YOUR PUBLISHABLE KEY]",
+  quote_amount: "2000", // required: amount to charge
+  quote_currency: "NGN", // required: currency for the quote amount (e.g., "NGN", "USD")
+  target_currency: "NGN", // required: target currency
+  source_currency: "NGN", // required: source currency
+  callback_url: "https://your-domain.com/callback", // optional: webhook callback URL
+  meta: { email: "email@example.com", name: "Busha" }, // optional: customer info
+  onClose: (d) => {
+    console.log("Payment cancelled!", d);
+  },
+  onSuccess: (d) => {
+    console.log(d);
+  },
+};
+
+BushaCommerce(payload);
 ```
-  const payload = {
-        reference: `ref_${new Date().getTime()}`, // optional, will be auto-generated if nothing's passed
-        public_key: "[YOUR PUBLISHABLE KEY]",
-        local_amount: 2000,
-        local_currency: "NGN", // "USD"
-        meta: {email: "email@example.com", name: "Busha" } // optional customer info
-        onClose: (d) => {
-            console.log("Payment cancelled!", d);
-        },
-        onSuccess: (d) => {
-            console.log(d);
-        }
-    }
 
-    BushaCommerce(payload)
-```
-
-> Can't find your publishable key ?
+> Can't find your public key ?
 >
-> ![Publishable key](https://res.cloudinary.com/busha-inc/image/upload/v1680477724/Screenshot_2023-04-03_at_00.13.21.png)
+> ![Public key](https://res.cloudinary.com/busha-inc/image/upload/v1764326664/commerce-js/Screenshot_2025-11-28_at_11.42.10.png)
