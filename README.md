@@ -7,7 +7,7 @@ Receive crypto payments with Busha commerce
 ### Browser
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@busha/commerce-js@1.0.16/dist/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@busha/commerce-js@1.0.17/dist/index.min.js"></script>
 
 <script>
   const BushaCommerce = window.BushaCommerce;
