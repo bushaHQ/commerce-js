@@ -7,6 +7,7 @@ import {
   LOADER_ID,
   CLOSE_BUTTON_ID,
   PAY_UI,
+  DEV_PAY_UI,
   IFRAME_ID,
   FORM_ID,
 } from "./constants/variables";
@@ -118,12 +119,13 @@ export function createSpinnerEl() {
   return spinnerEl;
 }
 
-export function createIframeEl() {
+export function createIframeEl(devMode = false) {
   const iframeEl = document.createElement("iframe");
+  const payUI = devMode ? DEV_PAY_UI : PAY_UI;
 
   iframeEl.dataset.testid = IFRAME_ID;
   iframeEl.name = IFRAME_ID;
-  iframeEl.allow = `clipboard-write self ${PAY_UI}`;
+  iframeEl.allow = `clipboard-write self ${payUI}`;
   iframeEl.style.width = "100%";
   // iframeEl.style.maxWidth = "100%";
   iframeEl.style.height = "100%";
@@ -139,11 +141,16 @@ export function createIframeEl() {
 
 type FormPayload = Omit<BushaCommercePayload, "onClose" | "onSuccess">;
 
-export function createFormEl(payload: FormPayload) {
+export function createFormEl({
+  devMode = false,
+  ...payload
+}: FormPayload & { devMode?: boolean }) {
+  const payUI = devMode ? DEV_PAY_UI : PAY_UI;
+
   const formEl = document.createElement("form");
   formEl.target = IFRAME_ID;
   formEl.dataset.testid = FORM_ID;
-  formEl.action = PAY_UI ? `${PAY_UI}/pay` : "";
+  formEl.action = payUI ? `${payUI}/pay` : "";
   formEl.method = "POST";
   formEl.style.display = "none";
 
@@ -151,7 +158,7 @@ export function createFormEl(payload: FormPayload) {
     for (const key in payload) {
       if (!payload.hasOwnProperty(key)) continue;
 
-      const paymentParamValue = payload[key as keyof FormPayload];
+      const paymentParamValue = payload[key as keyof typeof payload];
 
       if (typeof paymentParamValue === "object") {
         for (const _key in paymentParamValue) {

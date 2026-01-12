@@ -4,7 +4,8 @@ on:
     branches:
       - develop
 env:
-  PAYMENT_UI: ${{ vars.PAYMENT_UI_STAGING }}
+  PAYMENT_UI: ${{ vars.PAYMENT_UI }}
+  DEV_PAYMENT_UI: ${{ vars.PAYMENT_UI_STAGING }}
   CYPRESS_PUBLIC_KEY: ${{ vars.CYPRESS_PUBLIC_KEY_STAGING }}
 
 jobs:

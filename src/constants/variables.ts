@@ -6,6 +6,7 @@ export const IFRAME_ID = "busha-commerce-iframe";
 export const FORM_ID = "busha-commerce-form";
 
 export const PAY_UI = process.env.PAYMENT_UI;
+export const DEV_PAY_UI = process.env.DEV_PAYMENT_UI;
 
 export const INITIALIZED_STATUS = "INITIALIZED";
 

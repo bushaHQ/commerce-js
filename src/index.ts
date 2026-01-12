@@ -3,6 +3,7 @@ import {
   CLOSE_BUTTON_ID,
   COMPLETED_STATUS,
   CONTAINER_ID,
+  DEV_PAY_UI,
   INITIALIZED_STATUS,
   LOADER_ID,
   PAY_UI,
@@ -46,14 +47,14 @@ export default function BushaCommerce(p: BushaCommercePayload) {
   container.appendChild(spinner);
   container.appendChild(closeBtn);
 
-  const iframe = createIframeEl();
+  const iframe = createIframeEl(payload.devMode);
   container.appendChild(iframe);
 
   document.body.appendChild(container);
 
   const { onClose, onSuccess, ...rest } = p;
 
-  const iframeForm = createFormEl(rest);
+  const iframeForm = createFormEl({ devMode: payload.devMode, ...rest });
 
   container.appendChild(iframeForm);
 
@@ -79,9 +80,10 @@ function cleanup() {
 }
 
 const onMessage = (e: MessageEvent<MessageType>) => {
-  if (!PAY_UI) return;
+  const payUI = payload.devMode ? DEV_PAY_UI : PAY_UI;
+  if (!payUI) return;
 
-  const payUrl = new URL(PAY_UI);
+  const payUrl = new URL(payUI);
 
   if (e.origin !== payUrl.origin) return;
 
