@@ -39,6 +39,12 @@ export function injectGlobalStyles() {
         left: 50%;
         transform: translate(-50%, -50%);
       }
+
+      #${CLOSE_BUTTON_ID} .busha-commerce-close-icon {
+        width: 100%;
+        height: 100%;
+        fill: transparent;
+      }
     `;
 
   // return styleEl;
@@ -73,7 +79,8 @@ export function createContainerEl() {
   containerEl.style.width = "100%";
   containerEl.style.height = "100%";
   containerEl.style.zIndex = "999999999";
-  containerEl.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
+  containerEl.style.backgroundColor = "rgba(33, 41, 33, 0.20)";
+  containerEl.style.backdropFilter = "blur(27px)";
 
   return containerEl;
 }
@@ -86,9 +93,11 @@ export function createCloseBtnEl() {
   closeBtnEl.style.width = "40px";
   closeBtnEl.style.height = "40px";
   closeBtnEl.style.position = "absolute";
-  closeBtnEl.style.right = "0";
+  closeBtnEl.style.right = "36px";
+  closeBtnEl.style.top = "36px";
   closeBtnEl.style.zIndex = "40";
-  closeBtnEl.style.backgroundColor = "transparent";
+  closeBtnEl.style.backgroundColor = "#ffffff";
+  closeBtnEl.style.borderRadius = "100%";
   closeBtnEl.style.border = "none";
   closeBtnEl.innerHTML = close;
 
