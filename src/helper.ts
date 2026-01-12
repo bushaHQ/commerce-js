@@ -26,18 +26,6 @@ export function injectGlobalStyles() {
   document.head.appendChild(styleEl);
 
   styleEl.textContent = `
-      @keyframes busha-commerce-fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-
-      #${CONTAINER_ID} {
-        animation: busha-commerce-fadeIn 0.3s ease-in-out;
-      }
   
       #${CONTAINER_ID}, #${CONTAINER_ID} * {
         margin: 0;
