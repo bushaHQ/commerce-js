@@ -5,6 +5,7 @@ on:
       - main
 env:
   PAYMENT_UI: ${{ vars.PAYMENT_UI }}
+  DEV_PAYMENT_UI: ${{ vars.PAYMENT_UI_STAGING }}
   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   CYPRESS_PUBLIC_KEY: ${{ vars.CYPRESS_PUBLIC_KEY }}
 
