@@ -5,6 +5,7 @@ export declare const CLOSE_BUTTON_ID = "busha-commerce-close-btn";
 export declare const IFRAME_ID = "busha-commerce-iframe";
 export declare const FORM_ID = "busha-commerce-form";
 export declare const PAY_UI: string | undefined;
+export declare const DEV_PAY_UI: string | undefined;
 export declare const INITIALIZED_STATUS = "INITIALIZED";
 export declare const CANCELLED_STATUS = "CANCELLED";
 export declare const COMPLETED_STATUS = "COMPLETED";
