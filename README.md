@@ -40,6 +40,7 @@ const payload = {
   source_currency: "NGN", // required: source currency
   callback_url: "https://your-domain.com/callback", // optional: webhook callback URL
   meta: { email: "email@example.com", name: "Busha" }, // optional: customer info
+  devMode: true, // optional, defaults to false
   onClose: (d) => {
     console.log("Payment cancelled!", d);
   },
