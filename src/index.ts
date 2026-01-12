@@ -19,6 +19,8 @@ import {
 } from "./helper";
 import { BushaCommercePayload, MessageType } from "./types";
 
+export type { BushaCommercePayload };
+
 let payload: BushaCommercePayload;
 
 export default function BushaCommerce(p: BushaCommercePayload) {

@@ -24,6 +24,7 @@ const config: RollupOptions = {
   plugins: [
     replace({
       "process.env.PAYMENT_UI": JSON.stringify(process.env.PAYMENT_UI),
+      "process.env.DEV_PAYMENT_UI": JSON.stringify(process.env.DEV_PAYMENT_UI),
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV) || undefined,
       preventAssignment: true,
     }),
