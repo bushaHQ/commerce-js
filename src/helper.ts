@@ -1,4 +1,4 @@
-import { object, number, string } from "yup";
+import { object, string } from "yup";
 
 import { dark } from "./constants/colors";
 import {
@@ -13,6 +13,10 @@ import {
 } from "./constants/variables";
 import { BushaCommercePayload } from "./types";
 import { close } from "./constants/icons";
+
+const colorContainmentPrimary = "#EDF2ED";
+const colorContainmentTertiary = "#FFFFFF";
+const colorTextMid = "#586558";
 
 export function injectGlobalStyles() {
   const sheet = document.head.querySelector(`#${STYLESHEET_ID}`);
@@ -35,6 +39,15 @@ export function injectGlobalStyles() {
         }
       }
 
+      @keyframes pulse {
+        0%, 100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+
       #${CONTAINER_ID} {
         animation: busha-commerce-fadeIn 0.3s ease-in-out;
       }
@@ -50,12 +63,17 @@ export function injectGlobalStyles() {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        z-index: 40;
       }
 
       #${CLOSE_BUTTON_ID} .busha-commerce-close-icon {
         width: 100%;
         height: 100%;
         fill: transparent;
+      }
+
+      .animate-pulse {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
       }
     `;
 
@@ -97,21 +115,27 @@ export function createContainerEl() {
   return containerEl;
 }
 
-export function createCloseBtnEl() {
+function createCloseBtn(size = "40px") {
   const closeBtnEl = document.createElement("button");
   closeBtnEl.id = CLOSE_BUTTON_ID;
   closeBtnEl.dataset.testid = CLOSE_BUTTON_ID;
   closeBtnEl.setAttribute("type", "button");
-  closeBtnEl.style.width = "40px";
-  closeBtnEl.style.height = "40px";
-  closeBtnEl.style.position = "absolute";
-  closeBtnEl.style.right = "36px";
-  closeBtnEl.style.top = "36px";
-  closeBtnEl.style.zIndex = "40";
-  closeBtnEl.style.backgroundColor = "#ffffff";
+  closeBtnEl.style.width = size;
+  closeBtnEl.style.height = size;
+  closeBtnEl.style.backgroundColor = colorContainmentTertiary;
   closeBtnEl.style.borderRadius = "100%";
   closeBtnEl.style.border = "none";
   closeBtnEl.innerHTML = close;
+
+  return closeBtnEl;
+}
+
+export function createCloseBtnEl() {
+  const closeBtnEl = createCloseBtn("40px");
+  closeBtnEl.style.zIndex = "40";
+  closeBtnEl.style.position = "absolute";
+  closeBtnEl.style.right = "36px";
+  closeBtnEl.style.top = "36px";
 
   return closeBtnEl;
 }
@@ -140,6 +164,69 @@ export function createSpinnerEl() {
   return spinnerEl;
 }
 
+export function createShimmerEl() {
+  const shimmerEl = document.createElement("div");
+  shimmerEl.id = LOADER_ID;
+  shimmerEl.dataset.testid = LOADER_ID;
+  shimmerEl.style.width = "480px";
+  shimmerEl.style.height = "746px";
+  shimmerEl.style.backgroundColor = colorContainmentPrimary;
+  shimmerEl.style.borderRadius = "20px";
+  shimmerEl.style.padding = "20px";
+
+  const closeBtnEl = createCloseBtn("36px");
+
+  shimmerEl.innerHTML = `
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+     <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="animate-pulse" style="width: 288px; height: 32px; border-radius: 999px; background:${colorContainmentTertiary}"></div>
+        ${closeBtnEl.outerHTML}
+      </div>
+
+      <div style="display: flex; gap: 16px; align-items: center; justify-content: space-between; padding: 16px; border-radius: 16px; background:${colorContainmentTertiary}">
+        <div class="animate-pulse" style="width: 40px; height: 40px; border-radius: 999px; background:${colorContainmentPrimary}"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <div class="animate-pulse" style="width: 74px; height: 16px; border-radius: 999px; background:${colorContainmentPrimary}"></div>
+          <div class="animate-pulse" style="width: 254px; height: 14px; border-radius: 999px; background:${colorContainmentPrimary}"></div>
+        </div>
+        <div class="animate-pulse" style="width: 24px; height: 24px; border-radius: 999px; background:${colorContainmentPrimary}"></div>
+      </div>
+
+      <div style="display: flex; gap: 16px; align-items: center; justify-content: center; padding: 30px 16px; border-radius: 16px; background:${colorContainmentTertiary}">
+        <div class="animate-pulse" style="width: 200px; height: 200px; border-radius: 16px; background:${colorContainmentPrimary}"></div>
+      </div>
+
+      <div style="display: flex; gap: 20px; flex-direction: column; padding: 16px; border-radius: 16px; background:${colorContainmentTertiary}">
+        <div style="display: flex; gap: 16px; align-items: center; justify-content: space-between;">
+          <div class="animate-pulse" style="width: 40px; height: 40px; border-radius: 999px; background:${colorContainmentPrimary}"></div>
+          <div style="display: flex; flex-direction: column; gap: 2px;">
+            <div class="animate-pulse" style="width: 74px; height: 16px; border-radius: 999px; background:${colorContainmentPrimary}"></div>
+            <div class="animate-pulse" style="width: 254px; height: 14px; border-radius: 999px; background:${colorContainmentPrimary}"></div>
+          </div>
+          <div class="animate-pulse" style="width: 24px; height: 24px; border-radius: 999px; background:${colorContainmentPrimary}"></div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: center; justify-content: space-between;">
+          <div class="animate-pulse" style="width: 74px; height: 20px; border-radius: 999px; background:${colorContainmentPrimary}"></div>
+          <div class="animate-pulse" style="width: 124px; height: 20px; border-radius: 999px; background:${colorContainmentPrimary}"></div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: center; justify-content: space-between;">
+          <div class="animate-pulse" style="width: 124px; height: 20px; border-radius: 999px; background:${colorContainmentPrimary}"></div>
+          <div class="animate-pulse" style="width: 124px; height: 20px; border-radius: 999px; background:${colorContainmentPrimary}"></div>
+        </div>
+      </div>
+
+      <div style="height: 56px; width: 100%; border-radius: 999px; background:${colorContainmentTertiary}"></div>
+
+      <div style="display: flex; gap: 8px; align-items: center; justify-content: center;">
+        <p style="font-size: 14px; font-weight: 400; color:${colorTextMid}">Secured by</p>
+        <img src="https://res.cloudinary.com/busha-inc/image/upload/v1768821221/commerce-js/busha-logo.png" alt="Busha Logo" style="width: 72px; height: 16px;" />
+      </div>
+    </div>
+  `;
+
+  return shimmerEl;
+}
+
 export function createIframeEl(devMode = false) {
   const iframeEl = document.createElement("iframe");
   const payUI = devMode ? DEV_PAY_UI : PAY_UI;
@@ -165,7 +252,7 @@ type FormPayload = Omit<BushaCommercePayload, "onClose" | "onSuccess">;
 export function createFormEl({
   devMode = false,
   ...payload
-}: FormPayload & { devMode?: boolean }) {
+}: FormPayload) {
   const payUI = devMode ? DEV_PAY_UI : PAY_UI;
 
   const formEl = document.createElement("form");
