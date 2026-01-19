@@ -16,6 +16,7 @@ import {
   createCloseBtnEl,
   createIframeEl,
   createFormEl,
+  createShimmerEl,
 } from "./helper";
 import { BushaCommercePayload, MessageType } from "./types";
 
@@ -33,9 +34,11 @@ export default function BushaCommerce(p: BushaCommercePayload) {
   const container = createContainerEl();
 
   const spinner = createSpinnerEl();
-  const closeBtn = createCloseBtnEl();
+  const shimmer = createShimmerEl();
+  const closeBtn = shimmer.querySelector(`#${CLOSE_BUTTON_ID}`);
+  // const closeBtn = createCloseBtnEl();
 
-  closeBtn.addEventListener("click", (e) => {
+  closeBtn?.addEventListener("click", (e) => {
     e.preventDefault();
     cleanup();
     if (payload.onClose) {
@@ -46,8 +49,9 @@ export default function BushaCommerce(p: BushaCommercePayload) {
     }
   });
 
-  container.appendChild(spinner);
-  container.appendChild(closeBtn);
+  // container.appendChild(spinner);
+  container.appendChild(shimmer);
+  // container.appendChild(closeBtn);
 
   const iframe = createIframeEl(payload.devMode);
   container.appendChild(iframe);
