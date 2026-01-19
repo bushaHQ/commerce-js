@@ -100,12 +100,12 @@ const onMessage = (e: MessageEvent<MessageType>) => {
   if (e.data.status === INITIALIZED_STATUS) {
     const containerEl = document.getElementById(CONTAINER_ID);
     const loader = document.getElementById(LOADER_ID);
-    const closeBtn = document.getElementById(CLOSE_BUTTON_ID);
+    // const closeBtn = document.getElementById(CLOSE_BUTTON_ID);
 
-    if (!loader || !closeBtn) return;
+    if (!loader) return;
 
     containerEl?.removeChild(loader);
-    containerEl?.removeChild(closeBtn);
+    // containerEl?.removeChild(closeBtn);
   }
 
   if (e.data.status === CANCELLED_STATUS) {
