@@ -168,8 +168,9 @@ export function createShimmerEl() {
   const shimmerEl = document.createElement("div");
   shimmerEl.id = LOADER_ID;
   shimmerEl.dataset.testid = LOADER_ID;
-  shimmerEl.style.width = "480px";
-  shimmerEl.style.height = "746px";
+  shimmerEl.style.width = "500px";
+  shimmerEl.style.height = "100%";
+  shimmerEl.style.maxHeight = "90dvh";
   shimmerEl.style.backgroundColor = colorContainmentPrimary;
   shimmerEl.style.borderRadius = "20px";
   shimmerEl.style.padding = "20px";
@@ -177,7 +178,7 @@ export function createShimmerEl() {
   const closeBtnEl = createCloseBtn("36px");
 
   shimmerEl.innerHTML = `
-    <div style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="height: 100%; display: flex; flex-direction: column; gap: 24px;">
      <div style="display: flex; justify-content: space-between; align-items: center;">
         <div class="animate-pulse" style="width: 288px; height: 32px; border-radius: 999px; background:${colorContainmentTertiary}"></div>
         ${closeBtnEl.outerHTML}
@@ -217,7 +218,7 @@ export function createShimmerEl() {
 
       <div style="height: 56px; width: 100%; border-radius: 999px; background:${colorContainmentTertiary}"></div>
 
-      <div style="display: flex; gap: 8px; align-items: center; justify-content: center;">
+      <div style="display: flex; gap: 8px; align-items: center; justify-content: center; margin-top: auto;">
         <p style="font-size: 14px; font-weight: 400; color:${colorTextMid}">Secured by</p>
         <img src="https://res.cloudinary.com/busha-inc/image/upload/v1768821221/commerce-js/busha-logo.png" alt="Busha Logo" style="width: 72px; height: 16px;" />
       </div>
