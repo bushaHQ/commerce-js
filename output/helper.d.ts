@@ -16,9 +16,8 @@ export declare function validatePayload(p: BushaCommercePayload): {
 export declare function createContainerEl(): HTMLDivElement;
 export declare function createCloseBtnEl(): HTMLButtonElement;
 export declare function createSpinnerEl(): HTMLDivElement;
+export declare function createShimmerEl(): HTMLDivElement;
 export declare function createIframeEl(devMode?: boolean): HTMLIFrameElement;
 type FormPayload = Omit<BushaCommercePayload, "onClose" | "onSuccess">;
-export declare function createFormEl({ devMode, ...payload }: FormPayload & {
-    devMode?: boolean;
-}): HTMLFormElement;
+export declare function createFormEl({ devMode, ...payload }: FormPayload): HTMLFormElement;
 export {};
