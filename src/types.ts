@@ -3,6 +3,8 @@ export type MessageType = {
   data?: any;
 };
 
+export type SourceType = "payment-link";
+
 export interface BushaCommercePayload {
   quote_amount: string;
   quote_currency: string;
@@ -17,4 +19,6 @@ export interface BushaCommercePayload {
   devMode?: boolean;
   onClose?: (d?: any) => void;
   onSuccess: (d?: any) => void;
+  source?: SourceType;
+  source_id?: string;
 }
