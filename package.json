@@ -40,8 +40,14 @@
   "name": "@busha/commerce-js",
   "description": "Busha commerce js library",
   "version": "1.0.18",
-  "main": "./dist/index.js",
+  "main": "./dist/index.min.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.min.js",
+      "require": "./dist/index.min.js"
+    }
+  },
   "directories": {
     "example": "example"
   },
