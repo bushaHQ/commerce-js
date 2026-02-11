@@ -45,6 +45,7 @@
   "exports": {
     ".": {
       "import": "./dist/index.min.js",
+      "types": "./dist/index.d.ts",
       "require": "./dist/index.min.js"
     }
   },
