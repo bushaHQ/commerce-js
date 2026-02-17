@@ -12,7 +12,13 @@ const config: RollupOptions = {
   input: "src/index.ts",
   output: [
     {
-      dir: "dist",
+      file: "dist/index.esm.js",
+      format: "es",
+    },
+    {
+      file: "dist/index.cjs.js",
+      format: "cjs",
+      name: "BushaCommerce",
     },
     {
       file: "dist/index.min.js",
