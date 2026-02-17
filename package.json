@@ -40,13 +40,13 @@
   "name": "@busha/commerce-js",
   "description": "Busha commerce js library",
   "version": "1.0.25",
-  "main": "./dist/index.min.js",
+  "main": "./dist/index.cjs.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.min.js",
+      "import": "./dist/index.esm.js",
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.min.js"
+      "require": "./dist/index.cjs.js"
     }
   },
   "directories": {
@@ -65,5 +65,6 @@
   "bugs": {
     "url": "https://github.com/bushaHQ/commerce-js/issues"
   },
-  "homepage": "https://github.com/bushaHQ/commerce-js#readme"
+  "homepage": "https://github.com/bushaHQ/commerce-js#readme",
+  "module": "./dist/index.esm.js"
 }
