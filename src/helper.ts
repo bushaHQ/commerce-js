@@ -111,6 +111,7 @@ export function createContainerEl() {
   containerEl.style.zIndex = "999999999";
   containerEl.style.backgroundColor = "rgba(33, 41, 33, 0.20)";
   containerEl.style.backdropFilter = "blur(27px)";
+  containerEl.style.padding = "16px";
 
   return containerEl;
 }
@@ -168,7 +169,8 @@ export function createShimmerEl() {
   const shimmerEl = document.createElement("div");
   shimmerEl.id = LOADER_ID;
   shimmerEl.dataset.testid = LOADER_ID;
-  shimmerEl.style.width = "500px";
+  shimmerEl.style.width = "480px";
+  shimmerEl.style.maxWidth = "100%";
   shimmerEl.style.height = "100%";
   shimmerEl.style.maxHeight = "90dvh";
   shimmerEl.style.backgroundColor = colorContainmentPrimary;
