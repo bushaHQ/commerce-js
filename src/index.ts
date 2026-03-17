@@ -33,7 +33,7 @@ export default function BushaCommerce(p: BushaCommercePayload) {
 
   const container = createContainerEl();
 
-  const spinner = createSpinnerEl();
+  // const spinner = createSpinnerEl();
   const shimmer = createShimmerEl();
   const closeBtn = shimmer.querySelector(`#${CLOSE_BUTTON_ID}`);
   // const closeBtn = createCloseBtnEl();
