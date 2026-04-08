@@ -25,7 +25,7 @@ npm i @busha/commerce-js
 ```
 
 ```javascript
-import BushaCommerce from '@busha/commerce-js'
+import BushaCommerce from "@busha/commerce-js"
 ```
 
 ## Usage
@@ -33,22 +33,22 @@ import BushaCommerce from '@busha/commerce-js'
 ```javascript
 const payload = {
   reference: `ref_${new Date().getTime()}`, // optional; will be auto-generated if nothing is passed
-  public_key: '[YOUR PUBLISHABLE KEY]',
-  quote_amount: '2000', // required: amount to charge
-  quote_currency: 'NGN', // required: currency for the quote amount (e.g., "NGN", "USD")
-  target_currency: 'NGN', // required: target currency
-  source_currency: 'NGN', // required: source currency
-  callback_url: 'https://your-domain.com/callback', // optional: webhook callback URL
-  meta: { email: 'email@example.com', name: 'Busha' }, // optional: customer info
+  public_key: "[YOUR PUBLISHABLE KEY]",
+  quote_amount: "2000", // required: amount to charge
+  quote_currency: "NGN", // required: currency for the quote amount (e.g., "NGN", "USD")
+  target_currency: "NGN", // required: target currency
+  source_currency: "NGN", // required: source currency
+  callback_url: "https://your-domain.com/callback", // optional: webhook callback URL
+  meta: { email: "email@example.com", name: "Busha" }, // optional: customer info
   devMode: true, // optional; defaults to false
   onClose: (d) => {
-    console.log('Payment cancelled!', d)
+    console.log("Payment cancelled!", d)
   },
   onSuccess: (d) => {
     console.log(d)
   },
-  source: 'payment-link', // optional
-  source_id: '18937r13gufbqwe', // optional
+  source: "payment-link", // optional
+  source_id: "18937r13gufbqwe", // optional
 }
 
 BushaCommerce(payload)
