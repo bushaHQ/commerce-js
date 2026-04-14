@@ -237,6 +237,7 @@ export function createIframeEl(devMode = false) {
   iframeEl.dataset.testid = IFRAME_ID;
   iframeEl.name = IFRAME_ID;
   iframeEl.allow = `clipboard-write self ${payUI}`;
+  iframeEl.setAttribute("sandbox", ["allow-scripts", "allow-same-origin", "allow-popups", "allow-forms"].join(" "));
   iframeEl.style.width = "100%";
   // iframeEl.style.maxWidth = "100%";
   iframeEl.style.height = "100%";
