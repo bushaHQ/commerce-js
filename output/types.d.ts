@@ -1,5 +1,7 @@
 export type MessageType = {
-    status: string;
+    status?: string;
+    action?: string;
+    url?: string;
     data?: any;
 };
 export type SourceType = "payment-link";
