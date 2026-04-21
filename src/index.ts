@@ -6,6 +6,7 @@ import {
   DEV_PAY_UI,
   INITIALIZED_STATUS,
   LOADER_ID,
+  OPEN_EXTERNAL_LINK_ACTION,
   PAY_UI,
 } from "./constants/variables";
 import {
@@ -85,6 +86,10 @@ function cleanup() {
   document.body.removeChild(containerEl);
 }
 
+// Only schemes we'll forward to the OS. Prevents a compromised iframe from
+// asking us to open `javascript:`, `data:`, or arbitrary URIs.
+const ALLOWED_EXTERNAL_SCHEMES = /^(https?:|co\.busha\.[a-z.]+:)/i;
+
 const onMessage = (e: MessageEvent<MessageType>) => {
   const payUI = payload.devMode ? DEV_PAY_UI : PAY_UI;
   if (!payUI) return;
@@ -95,7 +100,19 @@ const onMessage = (e: MessageEvent<MessageType>) => {
 
   if (!payload) return;
 
-  // console.log(e.data);
+  // Imperative request from the iframe: open a link the iframe can't reach
+  // itself (custom scheme deep links, external URLs). We use `window.open`
+  // rather than `window.location.href` so the merchant's page is never
+  // replaced — if the scheme is unhandled, only the throwaway tab shows
+  // the browser's error UI.
+  if (
+    e.data.action === OPEN_EXTERNAL_LINK_ACTION &&
+    typeof e.data.url === "string" &&
+    ALLOWED_EXTERNAL_SCHEMES.test(e.data.url)
+  ) {
+    window.open(e.data.url, "_blank", "noopener,noreferrer");
+    return;
+  }
 
   if (e.data.status === INITIALIZED_STATUS) {
     const containerEl = document.getElementById(CONTAINER_ID);
